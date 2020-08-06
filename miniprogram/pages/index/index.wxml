@@ -1,0 +1,19 @@
+    <view class="swiper">
+      <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{ads}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" class="swiper-item"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+
+<view>
+  <scroll-view wx:for="{{posts}}"  wx:key="*this">
+  <text>{{item.title}}</text>
+  <text>{{item.category}}</text>
+  </scroll-view>
+</view>
+

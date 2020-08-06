@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room",
+    "pages/createSell/createSell",
+    "pages/userProfile/userProfile"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "国大二手",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我要买",
+        "iconPath": "images/purchase_off.png",
+        "selectedIconPath": "images/purchase_on.png"
+      },
+      {
+        "pagePath": "pages/createSell/createSell",
+        "text": "我要卖",
+        "iconPath": "images/sell_off.png",
+        "selectedIconPath": "images/sell_on.png"
+      },
+      {
+        "pagePath": "pages/userProfile/userProfile",
+        "text": "我的",
+        "iconPath": "images/userProfile_off.png",
+        "selectedIconPath": "images/userProfile_on.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

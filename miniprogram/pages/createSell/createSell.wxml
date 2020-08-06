@@ -1,0 +1,43 @@
+<view class="container">
+Create a Sale Post
+</view>
+<view class="container">
+<form bindsubmit="postSell"> 
+
+  <view class="container">
+  <view>Attractive Title</view>
+    <input bindinput="title_input" placeholder="type in here"></input>
+  </view>
+
+  <view class="section">
+    <view>
+      <picker bindchange="category_picker" value="{{category_selection_index}}" range="{{category_list}}">
+        <view class="picker">
+          Category: {{category_list[category_selection_index]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="section">
+    <picker bindchange="location_picker" value="{{location_selection_index}}" range="{{location_list}}">
+    <view class="picker">
+      Location: {{location_list[location_selection_index]}}
+    </view>
+  </picker>
+
+<view class="section">
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="bindDateChange">
+    <view class="picker">
+      当前选择: {{date}}
+    </view>
+  </picker>
+</view>
+
+
+</view>
+
+
+<button form-type="submit" class="button"> Submit </button>
+</form>
+</view>
