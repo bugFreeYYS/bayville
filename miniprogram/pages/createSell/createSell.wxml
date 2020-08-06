@@ -27,12 +27,13 @@ Create a Sale Post
   </picker>
 
 <view class="section">
-  <picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="bindDateChange">
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
     <view class="picker">
-      当前选择: {{date}}
+      交易日期: {{date}}
     </view>
   </picker>
 </view>
+
 
 
 </view>

@@ -1,5 +1,5 @@
 .swiper{
-  position: relative
+  position: relative;
 }
 .swiper-item{
   display: block;

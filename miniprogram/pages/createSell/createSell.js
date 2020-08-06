@@ -15,7 +15,9 @@ Page({
       name: "postSell",
       data: {
         title: this.data.title,
-        category: this.data.category_list[this.data.category_selection_index]
+        category: this.data.category_list[this.data.category_selection_index],
+        location: this.data.location_list[this.data.location_selection_index],
+        date: this.data.date
       },
       success: (res) => {
         wx.navigateTo({
@@ -24,19 +26,32 @@ Page({
       }
     })
   },
-  category_picker: function(event){
-    console.log('category is', event.detail.value)
-    this.setData({
-      category_selection_index: event.detail.value
-    })
-  },
+
   title_input: function(event){
     console.log('title is', event.detail.value)
     this.setData({
       title: event.detail.value
     })
   },
-  date_input: function(event){
+
+  category_picker: function(event){
+    console.log('category is', event.detail.value)
+    this.setData({
+      category_selection_index: event.detail.value
+    })
+  },
+
+  location_picker: function(event){
+    console.log('location is', event.detail.value)
+    this.setData({
+      location_selection_index: event.detail.value
+    })
+  },
+
+  date_picker: function(event){
     console.log('date is', event.detail.value)
+    this.setData({
+      date: event.detail.value
+    })
   }
 })
