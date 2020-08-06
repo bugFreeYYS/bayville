@@ -1,3 +1,6 @@
+
+
+
 <view>
 <text>排序</text>
 <radio-group class="radio-group" bindchange="rank_items" >

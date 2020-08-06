@@ -30,20 +30,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "我要买",
-        "iconPath": "images/purchase_off.png",
-        "selectedIconPath": "images/purchase_on.png"
+        "iconPath": "images/tab/purchase_off.png",
+        "selectedIconPath": "images/tab/purchase_on.png"
       },
       {
         "pagePath": "pages/createSell/createSell",
         "text": "我要卖",
-        "iconPath": "images/sell_off.png",
-        "selectedIconPath": "images/sell_on.png"
+        "iconPath": "images/tab/sell_off.png",
+        "selectedIconPath": "images/tab/sell_on.png"
       },
       {
         "pagePath": "pages/userProfile/userProfile",
         "text": "我的",
-        "iconPath": "images/userProfile_off.png",
-        "selectedIconPath": "images/userProfile_on.png"
+        "iconPath": "images/tab/userProfile_off.png",
+        "selectedIconPath": "images/tab/userProfile_on.png"
       }
     ]
   },
