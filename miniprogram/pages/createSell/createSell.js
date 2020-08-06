@@ -18,9 +18,10 @@ Page({
         category: this.data.category_list[this.data.category_selection_index]
       },
       success: (res) => {
+        console.log('create success!');
         wx.navigateTo({
           url: '/pages/index/index',
-        })
+        });
       }
     })
   },
@@ -31,7 +32,7 @@ Page({
     })
   },
   title_input: function(event){
-    console.log('title is', event.detail.value)
+    // console.log('title is', event.detail.value)
     this.setData({
       title: event.detail.value
     })

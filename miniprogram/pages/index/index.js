@@ -19,6 +19,25 @@ Page({
         })
       }
     })
+    
+  },
+
+  goToItem: function(e){
+
+    var that=this;
+    var itemid=  e.currentTarget.dataset.itemid;
+    //console.log(itemid);
+    wx.navigateTo({
+      url: '/pages/seeItem/seeItem?itemid='+itemid,
+    })
+  },
+
+  goToCategory: function(e){
+    var that=this;
+    var category= e.currentTarget.dataset.category;
+    wx.navigateTo({
+      url: '/pages/seeCategory/seeCategory?category='+category,
+    })
   }
 
 })

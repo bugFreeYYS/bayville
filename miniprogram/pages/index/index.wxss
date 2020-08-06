@@ -1,8 +1,10 @@
 .swiper{
-  position: relative
+  position: relative;
+  width:100%
+
 }
 .swiper-item{
   display: block;
-  height: 200px;
-  position: relative;
+  height: 200px;position: relative;
+  width:100%
 }

@@ -12,8 +12,9 @@
 
 <view>
   <scroll-view wx:for="{{posts}}"  wx:key="*this">
-  <text>{{item.title}}</text>
-  <text>{{item.category}}</text>
+  <text catchtap="goToItem" data-itemid="{{item._id}}">{{item.title}}|{{item.category}}</text>
+  <text>\n----</text>
+
   </scroll-view>
 </view>
 
