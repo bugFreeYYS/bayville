@@ -1,3 +1,5 @@
+<view>
+
     <view class="swiper">
       <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -9,11 +11,22 @@
       </swiper>
     </view>
 
+  <container class="container-box">
+    <block wx:for="{{category}}" wx:key="*this">
+      <view class="category-box">
+        <text class="produce-text">{{item}}</text>
+      </view>
+    </block>
+  </container>
 
-<view>
-  <scroll-view wx:for="{{posts}}"  wx:key="*this">
-  <text>{{item.title}}</text>
-  <text>{{item.category}}</text>
-  </scroll-view>
+  <container class="container-box">
+    <block wx:for="{{posts}}" wx:key="*this">
+      <view class="item-box">
+          <image class="product-photo"/>
+          <text class="product-text">{{item.title}}</text>
+      </view>
+    </block>
+  </container>
 </view>
+
 
