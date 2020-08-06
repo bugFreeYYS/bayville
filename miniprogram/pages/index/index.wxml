@@ -1,3 +1,5 @@
+<view>
+
     <view class="swiper">
       <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -9,12 +11,22 @@
       </swiper>
     </view>
 
+  <container class="container-box">
+    <block wx:for="{{category}}" wx:key="*this">
+      <view catchtap="goToCategory" data-category="{{item}}" class="category-box">
+        <text class="produce-text">{{item}}</text>
+      </view>
+    </block>
+  </container>
 
-<view>
-  <scroll-view wx:for="{{posts}}"  wx:key="*this">
-  <text catchtap="goToItem" data-itemid="{{item._id}}">{{item.title}}|{{item.category}}</text>
-  <text>\n----</text>
-
-  </scroll-view>
+  <container class="container-box">
+    <block wx:for="{{posts}}" wx:key="*this">
+      <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
+          <image class="product-photo"/>
+          <text class="product-text">{{item.title}}</text>
+      </view>
+    </block>
+  </container>
 </view>
+
 

@@ -5,6 +5,53 @@
 }
 .swiper-item{
   display: block;
-  height: 200px;position: relative;
-  width:100%
+  height: 200px;
+  position: relative;
+  width: 100%;
 }
+
+.container-box{
+  width: 100%;
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  }
+  
+.item-box{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+margin: 1%;
+width: 48%;
+height: auto;
+}
+
+.category-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2%;
+  width: 20%;
+  height: auto;
+  }
+
+.product-photo{
+  width: 100%;
+  height: 335rpx;
+  background-size: 100% 100%;
+  border: 1px solid rgba(240,240,240,.8);
+  background-image: linear-gradient(red, yellow, blue)
+  }
+
+.product-text{
+  margin:30rpx 0 30rpx 20rpx;
+  font-weight: bold;
+  align-self: flex-start;
+  flex: 1 0 auto;
+  font-size: 32rpx;
+  color: #292929;
+  }

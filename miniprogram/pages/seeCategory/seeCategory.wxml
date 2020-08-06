@@ -1,2 +1,21 @@
-<!--miniprogram/pages/seeCategory/seeCategory.wxml-->
-<text>miniprogram/pages/seeCategory/seeCategory.wxml</text>
+<view>
+<text>排序</text>
+<radio-group class="radio-group" bindchange="rank_items" >
+  <label class="radio" wx:for="{{rank_methods}}">
+    <radio class="radio" value="{{item.name}}"/>{{item.name}}
+  </label>
+</radio-group>
+
+
+
+  <container class="container-box">
+    <block wx:for="{{posts}}" wx:key="*this">
+      <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
+          <image class="product-photo"/>
+          <text class="product-text">{{item.title}}</text>
+      </view>
+    </block>
+  </container>
+</view>
+
+

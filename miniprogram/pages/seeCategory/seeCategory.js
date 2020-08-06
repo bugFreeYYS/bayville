@@ -5,6 +5,14 @@ Page({
    * Page initial data
    */
   data: {
+    
+
+    rank_methods: [
+      { name: 'price low to high', value: 'price low to high'},
+      { name: 'price high to low', value:  'price high to low' }
+    
+    ],
+
 
   },
 
@@ -87,5 +95,40 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  goToItem: function(e){
+
+    var that=this;
+    var itemid=  e.currentTarget.dataset.itemid;
+    //console.log(itemid);
+    wx.navigateTo({
+      url: '/pages/seeItem/seeItem?itemid='+itemid,
+    })
+  },
+
+  rank_items: function(e){
+
+    let rank_method= e.detail.value;
+
+   
+    
+    if (rank_method=='price high to low'){
+     var sorted_posts =this.data.posts.sort(function(a,b){
+                                                      if(parseFloat(a.title) > parseFloat(b.title)) return -1;
+                                                      else return 1;
+                                                    })
+     this.setData({
+       posts: sorted_posts
+     })
+    }
+    else{
+      var sorted_posts =this.data.posts.sort(function(a,b){
+                                                       if(parseFloat(a.title) > parseFloat(b.title)) return 1;
+                                                       else return -1;
+                                                     })
+      this.setData({
+        posts: sorted_posts
+      })
+     }
+  },
 })
