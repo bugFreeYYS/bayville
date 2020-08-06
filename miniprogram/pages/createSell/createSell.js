@@ -20,36 +20,36 @@ Page({
         date: this.data.date
       },
       success: (res) => {
+        console.log('create success!');
         wx.navigateTo({
           url: '/pages/index/index',
-        })
+        });
       }
     })
   },
 
   title_input: function(event){
-    console.log('title is', event.detail.value)
+    // console.log('title is', event.detail.value)
     this.setData({
       title: event.detail.value
     })
   },
 
   category_picker: function(event){
-    console.log('category is', event.detail.value)
+    // console.log('category is', event.detail.value)
     this.setData({
       category_selection_index: event.detail.value
     })
   },
-
-  location_picker: function(event){
-    console.log('location is', event.detail.value)
+  title_input: function(event){
+    // console.log('title is', event.detail.value)
     this.setData({
       location_selection_index: event.detail.value
     })
   },
 
   date_picker: function(event){
-    console.log('date is', event.detail.value)
+    // console.log('date is', event.detail.value)
     this.setData({
       date: event.detail.value
     })

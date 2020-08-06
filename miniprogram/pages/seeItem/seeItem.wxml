@@ -1,0 +1,5 @@
+<!--miniprogram/pages/seeItem/seeItem.wxml-->
+<!-- <text>miniprogram/pages/seeItem/seeItem.wxml</text> -->
+<text>{{info.title}}</text>
+<text>{{info.category}}</text>
+
