@@ -14,7 +14,8 @@
   <container class="container-box">
     <block wx:for="{{category}}" wx:key="*this">
       <view class="category-box">
-        <text class="produce-text">{{item}}</text>
+        <image class="category-icon" src="{{item.icon}}"/>
+        <text class="produce-text">{{item.name}}</text>
       </view>
     </block>
   </container>

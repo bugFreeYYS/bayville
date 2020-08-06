@@ -34,7 +34,14 @@ height: auto;
   flex-direction: column;
   margin: 2%;
   width: 20%;
-  height: auto;
+  height: 150rpx;
+  }
+
+.category-icon{
+  width: 60%;
+  height: 60%;
+  background-size: 100% 100%;
+  border: 1px solid rgba(240,240,240,.8);
   }
 
 .product-photo{
