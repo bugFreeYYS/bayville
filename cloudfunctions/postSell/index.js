@@ -8,7 +8,9 @@ exports.main = async (event, context) => {
   return await db.collection("posts").add({
     data: {
       title: event.title,
-      category: event.category
+      category: event.category,
+      location: event.location,
+      date: event.date
     }
   })
 }
