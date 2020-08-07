@@ -14,10 +14,11 @@ Page({
     wx.cloud.callFunction({
       name: "postSell",
       data: {
-        title: this.data.title,
-        category: this.data.category_list[this.data.category_selection_index],
-        location: this.data.location_list[this.data.location_selection_index],
-        date: this.data.date
+        title: event.detail.value.title,
+        category:  event.detail.value.category,
+        location:  event.detail.value.location,
+        price:  event.detail.value.price,
+        description: event.detail.value.description
       },
       success: (res) => {
         console.log('create success!');
@@ -53,5 +54,24 @@ Page({
     this.setData({
       date: event.detail.value
     })
-  }
+  },
+
+  location_picker: function(event){
+    // console.log('date is', event.detail.value)
+    this.setData({
+      location_selection_index: event.detail.value
+    })
+  },
+
+  
+
+  handleInput(e) {
+    let value = this.validateNumber(e.detail.value)
+    this.setData({
+      price:value
+    })
+  },
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
+  },
 })

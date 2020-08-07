@@ -10,7 +10,9 @@ exports.main = async (event, context) => {
       title: event.title,
       category: event.category,
       location: event.location,
-      date: event.date
+      // date: event.date
+      price:event.price,
+      description:event.description
     }
   })
 }

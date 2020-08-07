@@ -1,44 +1,50 @@
 <view class="container">
-Create a Sale Post
+	Create a Sale Post
 </view>
 <view class="container">
-<form bindsubmit="postSell"> 
+	<form bindsubmit="postSell">
 
-  <view class="container">
-  <view>Attractive Title</view>
-    <input bindinput="title_input" placeholder="type in here"></input>
-  </view>
+		<view class="container">
+			<view>Attractive Title</view>
+			<input name="title" bindinput="title_input" placeholder="type in here"></input>
+      	<!-- <input name="title"  placeholder="type in here"></input> -->
+		</view>
 
-  <view class="section">
-    <view>
-      <picker bindchange="category_picker" value="{{category_selection_index}}" range="{{category_list}}">
-        <view class="picker">
-          Category: {{category_list[category_selection_index]}}
-        </view>
-      </picker>
-    </view>
-  </view>
+		<view class="section">
+			<view>
+				<!-- <picker  value="{{category_selection_index}}" range="{{category_list}}"> -->
+        <picker name="category" bindchange="category_picker" value="{{category_list[category_selection_index]}}" range="{{category_list}}">
+					<view class="picker">
+						Category: {{category_list[category_selection_index]}}
+					</view>
+				</picker>
+			</view>
+		</view>
 
-  <view class="section">
-    <picker bindchange="location_picker" value="{{location_selection_index}}" range="{{location_list}}">
-    <view class="picker">
-      Location: {{location_list[location_selection_index]}}
-    </view>
-  </picker>
+		<view class="section">
+			<!-- <picker bindchange="location_picker" value="{{location_selection_index}}" range="{{location_list}}"> -->
+      <picker name="location" bindchange="location_picker" value="{{location_list[location_selection_index]}}" range="{{location_list}}">
+				<view class="picker">
+					Location: {{location_list[location_selection_index]}}
+				</view>
+			</picker>
+		</view>
+<!-- 
+		<view class="section">
+			<picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
+				<view class="picker">
+					交易日期: {{date}}
+				</view>
+			</picker>
+		</view> -->
 
-<view class="section">
-  <picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
-    <view class="picker">
-      交易日期: {{date}}
-    </view>
-  </picker>
-</view>
+		<text>价格</text>
+		<input name='price' type="digit" auto-focus focus='{{focus}}' value="{{value}}" title="" bindinput="handleInput" bindblur="validate" />
+
+		<text>描述</text>
+		<input name="description" type="string" placeholder="key in your description"></input>
 
 
-
-</view>
-
-
-<button form-type="submit" class="button"> Submit </button>
-</form>
+		<button form-type="submit" class="button"> Submit </button>
+	</form>
 </view>
