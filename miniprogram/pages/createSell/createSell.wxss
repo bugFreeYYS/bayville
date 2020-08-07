@@ -9,3 +9,19 @@
   font-size: 16px;
   color: white;
 }
+
+.photo-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 1%;
+  width: 90%;
+  height: 100rpx;
+  }
+
+.photo-preview{
+  width: 80%;
+  height: 80%;
+  border: 1px solid rgba(240,240,240,.8);
+  }
