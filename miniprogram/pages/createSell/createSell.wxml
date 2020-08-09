@@ -4,7 +4,7 @@
   <form bindsubmit="postSell"> 
 
     <view class="section">
-      <text>Attractive Title</text>
+      <view>Attractive Title: </view>
       <input bindinput="title_input" placeholder="type in here"></input>
     </view>
 
@@ -44,5 +44,6 @@
     </container>
 
     <button form-type="submit" class="button"> Submit </button>
+    <button formType='reset' class="button"> Reset </button>
   </form>
 </view>

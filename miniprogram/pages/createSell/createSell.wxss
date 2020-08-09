@@ -25,3 +25,13 @@
   height: 80%;
   border: 1px solid rgba(240,240,240,.8);
   }
+
+  .section{
+    display: flex;
+    flex-direction: row;
+    margin: 20rpx;
+  }  
+
+  .section view{
+    margin-right: 20rpx;
+  }  

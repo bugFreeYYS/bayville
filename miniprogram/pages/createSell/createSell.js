@@ -5,7 +5,8 @@ Page({
     category_list : ["Textbook", "Electronics", "Furniture", "Cosmetics"],
     category_selection_index:0,
     location_list : ["Utown", "Science", "FASS", "SOC"],
-    location_selection_index:0,
+    location_selection_index: 0,
+    date: "2016-09-01",
     images : []
   },
   
