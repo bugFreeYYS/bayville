@@ -38,7 +38,7 @@
     </view>
 
     <container class="photo-box">
-      <block wx:for="{{images}}" wx:key="*this">
+      <block wx:for="{{image_urls}}" wx:key="*this">
         <image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
       </block>
     </container>
