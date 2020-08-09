@@ -2,22 +2,22 @@
 Page({
   data:{
     title: '',
+    date: '',
     category_list : ["Textbook", "Electronics", "Furniture", "Cosmetics"],
     category_selection_index:0,
     location_list : ["Utown", "Science", "FASS", "SOC"],
-    location_selection_index: 0,
-    date: "2016-09-01",
-    images : []
+    location_selection_index:0,
+    image_urls : [],
   },
   
   onLoad: function(){
   },
 
   uploadImages: function(){
-    var images = this.data.images;
+    var image_urls = this.data.image_urls;
     var image;
-    for (image of images){
-      var cloud_path = "posts/".concat(image);
+    for (image of image_urls){
+      var cloud_path = "posts/".concat(image.split('/')[3]);
       wx.cloud.uploadFile({
         cloudPath: cloud_path,
         filePath: image,
@@ -30,20 +30,35 @@ Page({
 
   postSell: function(event){
     this.uploadImages()
+    console.log(this.data.image_urls);
     wx.cloud.callFunction({
       name: "postSell",
       data: {
-        title: this.data.title,
-        category: this.data.category_list[this.data.category_selection_index],
-        location: this.data.location_list[this.data.location_selection_index],
-        date: this.data.date
+        title: event.detail.value.title,
+        price:  event.detail.value.price,
+        description: event.detail.value.description,
+        contact: event.detail.value.contact,
+        category:  event.detail.value.category,
+        location:  event.detail.value.location,
+        transaction_date:event.detail.value.transaction_date,
+        image_urls : this.data.image_urls
+
       },
       success: (res) => {
         console.log('create success!');
-        wx.navigateTo({
-          url: '/pages/index/index',
+        wx.showToast({
+          title: 'Success',
+          icon: 'success',
+          duration: 2000
         });
+        setTimeout(function(){
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+          }, 3000
+        )
       }
+ 
     })
   },
 
@@ -81,17 +96,27 @@ Page({
     })
   },
 
-  chooseImage(event){
+  chooseImage: function(event){
     wx.chooseImage({
       count: 4,
       sizeType : ['original', 'compressed'],
       sourceType : ['album', 'camera'],
       success : res => {
-        this.setData({images : []})
-        const images = this.data.images.concat(res.tempFilePaths);
-        this.data.images = images.length <= 4 ? images : images.slice(0, 4) 
-        this.setData({images: images})
+        this.setData({image_urls : []})
+        const image_urls = this.data.image_urls.concat(res.tempFilePaths);
+        this.data.image_urls = image_urls.length <= 4 ? image_urls : image_urls.slice(0, 4) 
+        this.setData({image_urls: image_urls})
       }
     })
+  },
+  handleInput(e) {
+    let value = this.validateNumber(e.detail.value)
+    this.setData({
+      value
+    })
+  },
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
   }
+
 })
