@@ -55,11 +55,11 @@
 			<button bindtap="chooseImage"> choose image </button>
 		</view>
 
-		<container class="photo-box">
-			<block wx:for="{{images}}" wx:key="*this">
-				<image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
-			</block>
-		</container>
+    <container class="photo-box">
+      <block wx:for="{{image_urls}}" wx:key="*this">
+        <image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
+      </block>
+    </container>
 
 		<button form-type="submit" class="button"> Submit </button>
 	</form>

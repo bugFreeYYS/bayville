@@ -2,22 +2,21 @@
 Page({
   data:{
     title: '',
+    date: '',
     category_list : ["Textbook", "Electronics", "Furniture", "Cosmetics"],
     category_selection_index:0,
     location_list : ["Utown", "Science", "FASS", "SOC"],
     location_selection_index:0,
-    images : []
+    image_urls : [],
   },
   
   onLoad: function(){
   },
 
   uploadImages: function(){
-    var images = this.data.images;
+    var image_urls = this.data.image_urls;
     var image;
-    for (image of images){
-      
-      // console.log(image.split('/')[3]);
+    for (image of image_urls){
       var cloud_path = "posts/".concat(image.split('/')[3]);
       wx.cloud.uploadFile({
         cloudPath: cloud_path,
@@ -31,6 +30,7 @@ Page({
 
   postSell: function(event){
     this.uploadImages()
+    console.log(this.data.image_urls);
     wx.cloud.callFunction({
       name: "postSell",
       data: {
@@ -40,14 +40,25 @@ Page({
         contact: event.detail.value.contact,
         category:  event.detail.value.category,
         location:  event.detail.value.location,
-        transaction_date:event.detail.value.transaction_date
+        transaction_date:event.detail.value.transaction_date,
+        image_urls : this.data.image_urls
+
       },
       success: (res) => {
         console.log('create success!');
-        wx.navigateTo({
-          url: '/pages/index/index',
+        wx.showToast({
+          title: 'Success',
+          icon: 'success',
+          duration: 2000
         });
+        setTimeout(function(){
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+          }, 3000
+        )
       }
+ 
     })
   },
 
@@ -85,16 +96,16 @@ Page({
     })
   },
 
-  chooseImage(event){
+  chooseImage: function(event){
     wx.chooseImage({
       count: 4,
       sizeType : ['original', 'compressed'],
       sourceType : ['album', 'camera'],
       success : res => {
-        this.setData({images : []})
-        const images = this.data.images.concat(res.tempFilePaths);
-        this.data.images = images.length <= 4 ? images : images.slice(0, 4) 
-        this.setData({images: images})
+        this.setData({image_urls : []})
+        const image_urls = this.data.image_urls.concat(res.tempFilePaths);
+        this.data.image_urls = image_urls.length <= 4 ? image_urls : image_urls.slice(0, 4) 
+        this.setData({image_urls: image_urls})
       }
     })
   },

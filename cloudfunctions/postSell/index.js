@@ -21,11 +21,12 @@ exports.main = async (event, context) => {
       date_created:today,
       date_modified:today,
       date_expiring: date_expired,
-
-
+      
       seller_id:wxContext.OPENID,
       liked_by:new Set(),
-      viewed_by: []
+      viewed_by: [], 
+      
+      image_urls : event.image_urls
     }
   })
 }
