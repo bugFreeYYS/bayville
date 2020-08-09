@@ -46,7 +46,7 @@
   <container class="container-box">
     <block wx:for="{{posts}}" wx:key="*this">
       <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
-          <image class="product-photo"/>
+          <image src="{{item.image_urls_cloud[0]}}" class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
       </view>
     </block>

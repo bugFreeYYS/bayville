@@ -8,29 +8,36 @@ Page({
     location_list : ["Utown", "Science", "FASS", "SOC"],
     location_selection_index:0,
     image_urls : [],
+    image_urls_cloud: []
   },
   
   onLoad: function(){
   },
 
   uploadImages: function(){
+    var that = this;
     var image_urls = this.data.image_urls;
     var image;
+    this.setData({image_urls_cloud : []})
     for (image of image_urls){
       var cloud_path = "posts/".concat(image.split('/')[3]);
       wx.cloud.uploadFile({
         cloudPath: cloud_path,
         filePath: image,
-        success : res => {
-          console.log("uploaded", res)
+        success : (res) => {
+          const image_urls_cloud = that.data.image_urls_cloud.concat(res.fileID);
+          that.setData({image_urls_cloud: image_urls_cloud})
+          console.log("2");
         }
-        })
+      })
     }
+    console.log("3");
   },
 
   postSell: function(event){
+    console.log("1");
     this.uploadImages()
-    console.log(this.data.image_urls);
+    console.log("4");
     wx.cloud.callFunction({
       name: "postSell",
       data: {
@@ -40,9 +47,9 @@ Page({
         contact: event.detail.value.contact,
         category:  event.detail.value.category,
         location:  event.detail.value.location,
-        transaction_date:event.detail.value.transaction_date,
-        image_urls : this.data.image_urls
-
+        transaction_date: event.detail.value.transaction_date,
+        image_urls : this.data.image_urls,
+        image_urls_cloud: this.data.image_urls_cloud
       },
       success: (res) => {
         console.log('create success!');
@@ -109,12 +116,14 @@ Page({
       }
     })
   },
+
   handleInput(e) {
     let value = this.validateNumber(e.detail.value)
     this.setData({
       value
     })
   },
+
   validateNumber(val) {
     return val.replace(/\D/g, '')
   }
