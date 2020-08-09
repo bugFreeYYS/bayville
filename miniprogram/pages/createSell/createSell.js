@@ -8,37 +8,35 @@ Page({
     location_list : ["请选择", "Utown", "Science", "FASS", "SOC"],
     location_selection_index:0,
     image_urls : [],
+    image_urls_cloud: []
   },
   
   onLoad: function(){
   },
 
-  uploadImages: function(){
+  async uploadImages(){
+    var that = this;
     var image_urls = this.data.image_urls;
     var image;
+
+    
+    this.setData({image_urls_cloud : []})
     for (image of image_urls){
       var cloud_path = "posts/".concat(image.split('/')[3]);
-      wx.cloud.uploadFile({
+      await wx.cloud.uploadFile({
         cloudPath: cloud_path,
         filePath: image,
-        success : res => {
-          console.log("uploaded", res)
-        }
-        })
+      }).then(res =>{
+        const image_urls_cloud = that.data.image_urls_cloud.concat(res.fileID);
+        that.setData({ image_urls_cloud: image_urls_cloud });
+        
+      }) 
     }
+
   },
 
-  postSell: function(event){
-    this.uploadImages()
-    console.log(this.data.image_urls);
-    if (!event.detail.value.title){
-      wx.showToast({
-        title:"请输入商品名称",
-        icon:"none",
-        duration:1500
-      })
-    }
-    else{
+  async postSell(event){
+    await this.uploadImages();
     wx.cloud.callFunction({
       name: "postSell",
       data: {
@@ -48,8 +46,9 @@ Page({
         contact: event.detail.value.contact,
         category:  event.detail.value.category,
         location:  event.detail.value.location,
-        transaction_date:event.detail.value.transaction_date,
-        image_urls : this.data.image_urls
+        transaction_date: event.detail.value.transaction_date,
+        image_urls : this.data.image_urls,
+        image_urls_cloud: this.data.image_urls_cloud
       },
       success: (res) => {
         console.log('create success!');
@@ -67,8 +66,7 @@ Page({
       }
  
     })
-    }
-  },
+    },
 
   title_input: function(event){
     // console.log('title is', event.detail.value)
@@ -111,7 +109,8 @@ Page({
       }
     })
   },
-  handleInput: function(e) {
+
+  handleInput(e) {
     let value = this.validateNumber(e.detail.value)
     this.setData({
       value

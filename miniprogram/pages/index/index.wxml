@@ -1,4 +1,25 @@
-<view>
+
+<view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}" >
+        <view class='header'>
+            <image src='/images/wx_login.png'></image>
+        </view>
+ 
+        <view class='content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view>
+ 
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view>
+
+
+
+<view wx:else>>
 
     <view class="swiper">
       <swiper indicator-dots="{{indicatorDots}}"
@@ -25,7 +46,7 @@
   <container class="container-box">
     <block wx:for="{{posts}}" wx:key="*this">
       <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
-          <image class="product-photo"/>
+          <image src="{{item.image_urls_cloud[0]}}" class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
       </view>
     </block>

@@ -26,7 +26,8 @@ exports.main = async (event, context) => {
       liked_by:new Set(),
       viewed_by: [], 
       
-      image_urls : event.image_urls
+      image_urls : event.image_urls,
+      image_urls_cloud: event.image_urls_cloud
     }
   })
 }
