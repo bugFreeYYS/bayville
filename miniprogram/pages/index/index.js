@@ -33,9 +33,7 @@ Page({
   },
 
   goToItem: function(e){
-
-    var that=this;
-    var itemid=  e.currentTarget.dataset.itemid;
+    var itemid =  e.currentTarget.dataset.itemid;
     //console.log(itemid);
     wx.navigateTo({
       url: '/pages/seeItem/seeItem?itemid='+itemid,

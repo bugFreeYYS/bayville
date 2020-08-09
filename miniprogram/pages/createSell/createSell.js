@@ -8,6 +8,7 @@ Page({
     location_list : ["Utown", "Science", "FASS", "SOC"],
     location_selection_index:0,
     image_urls : [],
+    image_urls_cloud: []
   },
   
   onLoad: function(){
@@ -22,9 +23,12 @@ Page({
         cloudPath: cloud_path,
         filePath: image,
         success : res => {
-          console.log("uploaded", res)
+          this.setData({image_urls_cloud : []})
+          const image_urls_cloud = this.data.image_urls_cloud.concat(res.fieldID);
+          this.data.image_urls_cloud = image_urls_cloud.length <= 4 ? image_urls_cloud : image_urls_cloud.slice(0, 4) 
+          this.setData({image_urls_cloud: image_urls_cloud})
         }
-        })
+      })
     }
   },
 
