@@ -14,7 +14,27 @@ Page({
   onLoad: function(){
   },
 
-  uploadImages: function(){
+  // uploadImages: function(){
+  //   var that = this;
+  //   var image_urls = this.data.image_urls;
+  //   var image;
+  //   this.setData({image_urls_cloud : []})
+  //   for (image of image_urls){
+  //     var cloud_path = "posts/".concat(image.split('/')[3]);
+  //     wx.cloud.uploadFile({
+  //       cloudPath: cloud_path,
+  //       filePath: image,
+  //       success : (res) => {
+  //         const image_urls_cloud = that.data.image_urls_cloud.concat(res.fileID);
+  //         that.setData({image_urls_cloud: image_urls_cloud})
+  //         console.log("2");
+  //       }
+  //     })
+  //   }
+  //   return true
+  // },
+
+  postSell: function(event){
     var that = this;
     var image_urls = this.data.image_urls;
     var image;
@@ -27,17 +47,13 @@ Page({
         success : (res) => {
           const image_urls_cloud = that.data.image_urls_cloud.concat(res.fileID);
           that.setData({image_urls_cloud: image_urls_cloud})
-          console.log("2");
+          console.log("1");
         }
       })
     }
-    console.log("3");
-  },
 
-  postSell: function(event){
-    console.log("1");
-    this.uploadImages()
-    console.log("4");
+    console.log("2");
+
     wx.cloud.callFunction({
       name: "postSell",
       data: {
