@@ -2,10 +2,10 @@
 Page({
   data:{
     title: '',
-    date: '',
-    category_list : ["Textbook", "Electronics", "Furniture", "Cosmetics"],
+    date: '请选择',
+    category_list : ["请选择", "Textbook", "Electronics", "Furniture", "Cosmetics"],
     category_selection_index:0,
-    location_list : ["Utown", "Science", "FASS", "SOC"],
+    location_list : ["请选择", "Utown", "Science", "FASS", "SOC"],
     location_selection_index:0,
     image_urls : [],
   },
@@ -31,6 +31,14 @@ Page({
   postSell: function(event){
     this.uploadImages()
     console.log(this.data.image_urls);
+    if (!event.detail.value.title){
+      wx.showToast({
+        title:"请输入商品名称",
+        icon:"none",
+        duration:1500
+      })
+    }
+    else{
     wx.cloud.callFunction({
       name: "postSell",
       data: {
@@ -42,12 +50,11 @@ Page({
         location:  event.detail.value.location,
         transaction_date:event.detail.value.transaction_date,
         image_urls : this.data.image_urls
-
       },
       success: (res) => {
         console.log('create success!');
         wx.showToast({
-          title: 'Success',
+          title: '提交成功',
           icon: 'success',
           duration: 2000
         });
@@ -60,6 +67,7 @@ Page({
       }
  
     })
+    }
   },
 
   title_input: function(event){
@@ -82,12 +90,6 @@ Page({
     })
   },
 
-  title_input: function(event){
-    // console.log('title is', event.detail.value)
-    this.setData({
-      location_selection_index: event.detail.value
-    })
-  },
 
   date_picker: function(event){
     // console.log('date is', event.detail.value)
@@ -109,14 +111,23 @@ Page({
       }
     })
   },
-  handleInput(e) {
+  handleInput: function(e) {
     let value = this.validateNumber(e.detail.value)
     this.setData({
       value
     })
   },
-  validateNumber(val) {
-    return val.replace(/\D/g, '')
-  }
+  validateNumber: function(val) {
+   
+    // console.log(this.validate(val));
+    return this.validate(val)?val: val.slice(0,-1);
+
+  },
+  
+  validate: function(s) {
+    var rgx = /^[0-9]+\.{0,1}[0-9]{0,2}$/;
+    return s.match(rgx);
+}
+
 
 })
