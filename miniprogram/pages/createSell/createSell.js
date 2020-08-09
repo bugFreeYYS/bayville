@@ -38,11 +38,15 @@ Page({
     wx.cloud.callFunction({
       name: "postSell",
       data: {
-        title: this.data.title,
-        category: this.data.category_list[this.data.category_selection_index],
-        location: this.data.location_list[this.data.location_selection_index],
-        date: this.data.date,
+        title: event.detail.value.title,
+        price:  event.detail.value.price,
+        description: event.detail.value.description,
+        contact: event.detail.value.contact,
+        category:  event.detail.value.category,
+        location:  event.detail.value.location,
+        transaction_date:event.detail.value.transaction_date,
         image_urls : this.data.image_urls
+
       },
       success: (res) => {
         console.log('create success!');
@@ -108,5 +112,15 @@ Page({
         this.setData({image_urls: image_urls})
       }
     })
+  },
+  handleInput(e) {
+    let value = this.validateNumber(e.detail.value)
+    this.setData({
+      value
+    })
+  },
+  validateNumber(val) {
+    return val.replace(/\D/g, '')
   }
+
 })

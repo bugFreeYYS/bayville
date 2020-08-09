@@ -1,41 +1,59 @@
-<view class="container">Create a Sale Post</view>
-
 <view class="container">
-  <form bindsubmit="postSell"> 
+	<form bindsubmit="postSell">
 
-    <view class="section">
-      <text>Attractive Title</text>
-      <input bindinput="title_input" placeholder="type in here"></input>
-    </view>
+		<view class="section">
+			<text>商品名称</text>
+			<input name='title' bindinput="title_input" placeholder="type in here"></input>
+		</view>
 
-    <view class="section">
-        <picker bindchange="category_picker" value="{{category_selection_index}}" range="{{category_list}}">
-          <text class="picker">
-            Category: {{category_list[category_selection_index]}}
+
+		<view class="section">
+			<text>价格</text>
+			<input name='price' type="digit" auto-focus focus='{{focus}}' value="{{value}}" title="" bindinput="handleInput"  />
+	</view>
+
+  <view class="section">
+    <text>商品描述</text>
+    <input name ="description" type="string" placeholder = "输入商品描述"></input>
+
+  </view>
+
+  <view class="section">
+    <text>联系方式</text>
+    <input name ="contact" type="string" placeholder = "输入商品描述"></input>
+
+  </view>
+
+		<view class="section">
+			<picker name="category" bindchange="category_picker" value=" {{category_list[category_selection_index]}}" range="{{category_list}}">
+				<text class="picker">
+            商品种类: {{category_list[category_selection_index]}}
           </text>
-        </picker>
-    </view>
+			</picker>
+		</view>
 
-    <view class="section">
-      <picker bindchange="location_picker" value="{{location_selection_index}}" range="{{location_list}}">
-      <text class="picker">
-        Location: {{location_list[location_selection_index]}}
+		<view class="section">
+			<picker name="location" bindchange="location_picker" value="{{location_list[location_selection_index]}}" range="{{location_list}}">
+				<text class="picker">
+        交易地点: {{location_list[location_selection_index]}}
       </text>
-      </picker>
-    </view>
+			</picker>
+		</view>
 
 
-    <view class="section">
-      <picker mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
-        <text class="picker">
+
+
+		<view class="section">
+			<picker name="transaction_date" mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
+				<text class="picker">
           交易日期: {{date}}
         </text>
-      </picker>
-    </view>
+			</picker>
+		</view>
 
-    <view class="section">
-    <button bindtap="chooseImage"> choose image </button>
-    </view>
+		<view class="section">
+			<button bindtap="chooseImage"> choose image </button>
+		</view>
 
     <container class="photo-box">
       <block wx:for="{{image_urls}}" wx:key="*this">
@@ -43,6 +61,6 @@
       </block>
     </container>
 
-    <button form-type="submit" class="button"> Submit </button>
-  </form>
+		<button form-type="submit" class="button"> Submit </button>
+	</form>
 </view>
