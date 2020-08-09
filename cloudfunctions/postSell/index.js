@@ -8,7 +8,7 @@ exports.main = async (event, context) => {
   var today = new Date();
   var date_expired = new Date();
   date_expired.setDate(today.getDate()+7);
-  return await db.collection("posts_test").add({
+  return await db.collection("posts").add({
     data: {
       title: event.title,
       price:event.price,
