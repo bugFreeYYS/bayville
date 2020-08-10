@@ -6,5 +6,7 @@ cloud.init()
 const db = cloud.database()
 // 云函数入口函数
 exports.main = async ( event, context) => {
-  return await db.collection("posts").where({_id:event.itemid}).get();
+  return await db.collection("posts").doc(event.itemid).get();
+ 
+  
 }

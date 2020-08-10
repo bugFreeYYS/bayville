@@ -1,4 +1,4 @@
-
+<!-- permission -->
 <view wx:if="{{isHide}}">
     <view wx:if="{{canIUse}}" >
         <view class='header'>
@@ -17,10 +17,8 @@
     <view wx:else>请升级微信版本</view>
 </view>
 
-
-
-<view wx:else>>
-
+<view wx:else>
+    <!-- swiper -->
     <view class="swiper">
       <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -32,6 +30,7 @@
       </swiper>
     </view>
 
+  <!-- category section -->
   <container class="container-box">
     <block wx:for="{{category}}" wx:key="*this">
 
@@ -43,15 +42,17 @@
     </block>
   </container>
 
-  <container class="container-box">
-    <block wx:for="{{posts}}" wx:key="*this">
+  <!-- posts section -->
+  <scroll-view class="container-box">
+    <block wx:for="{{posts_display}}" wx:key="*this">
       <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
           <image src="{{item.image_urls_cloud[0]}}" class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
           <text class="product-text" > {{item.nickname}} </text>
       </view>
     </block>
-  </container>
+  </scroll-view>
+
 </view>
 
 

@@ -3,7 +3,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
 
-
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -14,102 +13,95 @@ Page({
       'https://images.unsplash.com/photo-1551446591-142875a901a1?w=640'
     ],
     category: [{
-      name: 'Textbook',
-      icon: '../../images/index/textbook.png'
-    },
-    {
-      name: 'Electronics',
-      icon: '../../images/index/electronics.png'
-    },
-    {
-      name: 'Clothes',
-      icon: '../../images/tab/purchase_on.png'
-    },
-    {
-      name: 'Boyfriends',
-      icon: '../../images/tab/purchase_on.png'
-    },
-    {
-      name: 'Girlfriends',
-      icon: '../../images/tab/purchase_on.png'
-    },
-    {
-      name: 'Wifes',
-      icon: '../../images/tab/purchase_on.png'
-    },
-    {
-      name: 'Husbands',
-      icon: '../../images/tab/purchase_on.png'
-    },
-    {
-      name: 'Trump',
-      icon: '../../images/index/trump.png'
-    }
+        name: 'Textbook',
+        icon: '../../images/index/textbook.png'
+      },
+      {
+        name: 'Electronics',
+        icon: '../../images/index/electronics.png'
+      },
+      {
+        name: 'Clothes',
+        icon: '../../images/tab/purchase_on.png'
+      },
+      {
+        name: 'Boyfriends',
+        icon: '../../images/tab/purchase_on.png'
+      },
+      {
+        name: 'Girlfriends',
+        icon: '../../images/tab/purchase_on.png'
+      },
+      {
+        name: 'Wifes',
+        icon: '../../images/tab/purchase_on.png'
+      },
+      {
+        name: 'Husbands',
+        icon: '../../images/tab/purchase_on.png'
+      },
+      {
+        name: 'Trump',
+        icon: '../../images/index/trump.png'
+      }
     ],
-    displayed_users: 'default'
+    posts_display_count: 3
   },
-  async onLoad() {
+
+  onLoad: function () {
     var that = this;
     var post;
-
-    var getallposts = new Promise(function (resolve, reject) {
+    var get_all_posts= new Promise(function(resolve, reject){
       wx.cloud.callFunction({
         name: "getPosts",
         success: (res) => {
           that.setData({
             posts: res.result.data
-
+          }),
+          that.setData({
+            posts_display: that.data.posts//.slice(0,that.data.posts_display_count)
           });
-          resolve(res.result.data);
+          for (post in that.data.posts){
+             that.add_nickname(that.data.posts[post].seller_id,function(nickname){
+              
+                that.data.posts[post].nickname=nickname;
+              
+            })
+          }
+          resolve('success');
+
+          
         }
       });
+      
     })
+
+      get_all_posts.then(function(msg){
+        // console.log(msg)
+      })
+      
+      
 
     
-    getallposts.then(function () {
-      for (post in that.data.posts) {
-        var cur_seller_id = that.data.posts[post].seller_id
-        // if (!(cur_seller_id in that.data.displayed_users)) {
-
-          await wx.cloud.callFunction({
-            name: "getNickname",
-            data: {
-              openid: seller_id
-            },
-            success: (res) => {
-              console.log(res.result.data.nickname);
-              this.data.posts[index].nickname=res.result.data.nickname;
-            }
-      
-          })
-        // }
-      }
-
-    })
-    console.log(this.data)
-
   },
 
-  getNickname: function(seller_id, index) {
-    wx.cloud.callFunction({
-      name: "getNickname",
-      data: {
-        openid: seller_id
+  add_nickname: async function(openid,callback){
+    await wx.cloud.callFunction({
+      name:'getNickname',
+      data:{
+        openid:openid
       },
-      success: (res) => {
-        console.log(res.result.data.nickname);
-        this.data.posts[index].nickname=res.result.data.nickname;
+      success: (res) =>{
+        // console.log(res.result.data.nickname);
+        return callback(res.result.data.nickname)
       }
-
     })
-    // return nickname;
   },
-
 
 
   goToItem: function (e) {
     var itemid = e.currentTarget.dataset.itemid;
-    //console.log(itemid);
+    
     wx.navigateTo({
       url: '/pages/seeItem/seeItem?itemid=' + itemid,
     })
@@ -121,6 +113,13 @@ Page({
     console.log(category);
     wx.navigateTo({
       url: '/pages/seeCategory/seeCategory?category=' + category,
+    })
+  },
+
+  continuousScroll: function(event){
+    var count = this.data.posts_display_count + 4;
+    this.setData({
+      posts_display_count : count
     })
   },
 

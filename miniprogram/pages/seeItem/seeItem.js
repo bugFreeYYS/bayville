@@ -1,91 +1,98 @@
 // miniprogram/pages/seeItem/seeItem.js
+
+var utils= require('../../utils/util.js');
+
 Page({
 
-  /**
-   * Page initial data
-   */
   data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isHide: false,
+
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    duration: 100,
+
+    imgwidth: 0,
+    imgheight: 0,
 
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
   onLoad: function (options) {
-    var itemid= options.itemid;
     
+  
+    var _this = this;
+    var itemid = options.itemid;
     this.setData({
-      itemid:itemid,
+      itemid: itemid,
     })
+		wx.getSystemInfo({
+			success: function(res) {
+				_this.setData({
+					screenHeight: res.windowHeight,
+					screenWidth: res.windowWidth,
+				});
+			}
+		});
 
     wx.cloud.callFunction({
-      name:'getItemView',
-      data:{
-        itemid:itemid
+      name: 'getItemView',
+      data: {
+        itemid: itemid
       },
       success: (res) => {
-       
+
         this.setData({
-          info: res.result.data[0],
+          item_info: res.result.data,
+          converted_time: utils.getDateDiff(
+            utils.getDateTimeStamp(res.result.data.date_created.split('.')[0])
+          ),
+          
+        })
+
+        wx.cloud.callFunction({
+          name: 'getNickname',
+          data: {
+            openid: res.result.data.seller_id
+          },
+          success: (res2) => {
+            this.setData({
+              seller_info: res2.result.data
+            })
+          }
+        })
+
+        wx.cloud.callFunction({
+          name:'incrementViewNo',
+          data:{
+            itemid: itemid,
+            cur_views: this.data.item_info.viewed_by
+          },
+          success : (res) =>{
+            // console.log('incremented view number');
+          }
         })
       },
 
-      fail : err => {
+      fail: err => {
         console.log(err)
       }
+      
     });
-
-    // console.log(this);
-
-
+    // console.log(this.data);
   },
 
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
-  onReady: function () {
 
-  },
-
-  /**
-   * Lifecycle function--Called when page show
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page hide
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * Lifecycle function--Called when page unload
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * Page event handler function--Called when user drop down
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * Called when page reach bottom
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage: function () {
-
+  imageLoad: function (e) {
+    var _this = this;
+    var $width = e.detail.width, //获取图片真实宽度
+      $height = e.detail.height,
+      ratio = $width / $height; //图片的真实宽高比例
+    var viewWidth = _this.data.screenWidth, //设置图片显示宽度，
+      viewHeight = viewWidth / ratio; //计算的高度值   
+    this.setData({
+      imgwidth: viewWidth*2,
+      imgheight: viewHeight*2
+    })
   }
 })

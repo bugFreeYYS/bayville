@@ -23,7 +23,7 @@ exports.main = async (event, context) => {
       date_expiring: date_expired,
       
       seller_id:wxContext.OPENID,
-      liked_by:new Set(),
+      liked_by:[],
       viewed_by: [], 
       
       image_urls : event.image_urls,

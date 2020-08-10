@@ -44,7 +44,6 @@ Page({
         
       }) 
     }
-    // console.log("3");
   },
 
   async postSell(event){
