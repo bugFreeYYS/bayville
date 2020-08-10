@@ -48,6 +48,7 @@ Page({
     posts_display_count: 2
   },
 
+  // Load the page
   onLoad: function () {
     var that = this;
     wx.stopPullDownRefresh()
@@ -89,11 +90,11 @@ Page({
       name: "getPosts",
       success: (res) => {
         this.setData({
-          posts: res.result.data
-        }),
-        this.setData({
-          posts_display: this.data.posts.slice(0,this.data.posts_display_count)
-        })
+            posts: res.result.data
+          }),
+          this.setData({
+            posts_display: this.data.posts.slice(0, this.data.posts_display_count)
+          })
       }
     })
   },
@@ -126,6 +127,7 @@ Page({
     }
   },
 
+  // route to listing page
   goToItem: function (e) {
     var itemid = e.currentTarget.dataset.itemid;
     //console.log(itemid);
@@ -134,6 +136,7 @@ Page({
     })
   },
 
+  // route to category page
   goToCategory: function (e) {
     var that = this;
     var category = e.currentTarget.dataset.category.name;
@@ -143,12 +146,14 @@ Page({
     })
   },
 
-  onPullDownRefresh: function(){
+  // reload the page
+  onPullDownRefresh: function () {
     var that = this;
     this.onLoad();
   },
 
-  onReachBottom: function(){
+  // load more listings
+  onReachBottom: function () {
     var that = this;
 
     wx.showToast({
@@ -158,22 +163,19 @@ Page({
     })
 
     var count = this.data.posts_display_count + 2
-
-    if (count > this.data.posts.length + 1){
+    if (count > this.data.posts.length + 1) {
       wx.showToast({
         title: '没有更多了',
         icon: 'none',
         duration: 1000
       })
+    } else {
+      this.setData({
+          posts_display_count: count
+        }),
+        this.setData({
+          posts_display: this.data.posts.slice(0, this.data.posts_display_count)
+        })
     }
-
-    else{
-    this.setData({
-      posts_display_count : count
-    }),
-    this.setData({
-      posts_display: this.data.posts.slice(0, this.data.posts_display_count)
-    })
   }
-}
 })
