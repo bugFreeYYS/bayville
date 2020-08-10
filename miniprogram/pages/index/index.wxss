@@ -21,13 +21,11 @@
   }
   
 .item-box{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-margin: 1%;
-width: 48%;
-height: auto;
+  float:left;
+  width:48%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 10px 10px;
 }
 
 .category-box{

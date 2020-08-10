@@ -45,11 +45,12 @@ Page({
         icon: '../../images/index/trump.png'
       }
     ],
-    posts_display_count: 3
+    posts_display_count: 2
   },
 
   onLoad: function () {
     var that = this;
+    wx.stopPullDownRefresh()
     // 查看是否授权
     wx.getSetting({
       success: function (res) {
@@ -142,11 +143,37 @@ Page({
     })
   },
 
-  continuousScroll: function(event){
-    var count = this.data.posts_display_count + 4;
+  onPullDownRefresh: function(){
+    var that = this;
+    this.onLoad();
+  },
+
+  onReachBottom: function(){
+    var that = this;
+
+    wx.showToast({
+      title: '玩命加载中',
+      icon: 'loading',
+      duration: 500
+    })
+
+    var count = this.data.posts_display_count + 2
+
+    if (count > this.data.posts.length + 1){
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none',
+        duration: 1000
+      })
+    }
+
+    else{
     this.setData({
       posts_display_count : count
+    }),
+    this.setData({
+      posts_display: this.data.posts.slice(0, this.data.posts_display_count)
     })
   }
-
+}
 })

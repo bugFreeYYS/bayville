@@ -43,14 +43,16 @@
   </container>
 
   <!-- posts section -->
-  <scroll-view class="container-box">
+  <view class="container-box" scroll-y="{{true}}">
     <block wx:for="{{posts_display}}" wx:key="*this">
       <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
           <image src="{{item.image_urls_cloud[0]}}" class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
       </view>
     </block>
-  </scroll-view>
+  </view>
+
+
 
 </view>
 
