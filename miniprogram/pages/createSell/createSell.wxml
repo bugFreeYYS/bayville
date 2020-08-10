@@ -1,63 +1,62 @@
-<view class="container">
+<view>
 	<form bindsubmit="postSell">
+		<view class="bg-fff p-lr30 border-t">
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">商品名称: </label>
+				<input class="ml40 flex1" name='title' bindinput="title_input" placeholder="输入商品名称"></input>
+			</view>
 
-		<view class="section">
-			<text>商品名称</text>
-			<input name='title' bindinput="title_input" placeholder="type in here"></input>
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">价格: </label>
+				<input class="ml40 flex1" name='price' type="digit" auto-focus focus='{{focus}}' value="{{value}}" title="" placeholder="输入商品价格" bindinput="handleInput"></input>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">联系方式: </label>
+				<input class="ml40 flex1" name="contact" type="string" placeholder="输入联系方式"></input>
+			</view>
+
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">商品种类:</label>
+				<picker class="ml40 flex1" name="category" bindchange="category_picker" value="{{category_list[category_selection_index]}}" range="{{category_list}}">
+					{{category_list[category_selection_index]}}
+				</picker>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">交易地点:</label>
+				<picker class="ml40 flex1" name="location" bindchange="location_picker" value="{{location_list[location_selection_index]}}" range="{{location_list}}">
+					{{location_list[location_selection_index]}}
+				</picker>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">交易日期:</label>
+				<picker class="ml40 flex1" name="transaction_date" mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
+					{{date}}
+				</picker>
+			</view>
+
+			<!-- description -->
+			<view class="ipt-wrap border-b">
+				<textarea name="description" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" type="string" placeholder="可在此处填写商品描述"></textarea>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<button class="ml40 flex1" bindtap="chooseImage"> 上传照片 </button>
+			</view>
+
+			<container class="photo-box">
+				<block wx:for="{{image_urls}}" wx:key="*this">
+					<image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
+				</block>
+			</container>
+
 		</view>
-
-
-		<view class="section">
-			<text>价格</text>
-			<input name='price' type="digit" auto-focus focus='{{focus}}' value="{{value}}" title="" bindinput="handleInput"  />
-	</view>
-
-  <view class="section">
-    <text>商品描述</text>
-    <input name ="description" type="string" placeholder = "输入商品描述"></input>
-
-  </view>
-
-  <view class="section">
-    <text>联系方式</text>
-    <input name ="contact" type="string" placeholder = "输入商品描述"></input>
-
-  </view>
-
-		<view class="section">
-			<picker name="category" bindchange="category_picker" value=" {{category_list[category_selection_index]}}" range="{{category_list}}">
-				<text class="picker">
-            商品种类: {{category_list[category_selection_index]}}
-          </text>
-			</picker>
+		<view style="padding: 2% 2%">
+			<button form-type="reset" style= "background-color: #FFA500; text-align: center; font-size: 16px; color: white; width: 48.5%; float:left;"> 重置 </button>
+			<button form-type="submit" style= "background-color: #4CAF50; text-align: center; font-size: 16px; color: white; width: 48.5%; float:right"> 提交 </button>
 		</view>
-
-		<view class="section">
-			<picker name="location" bindchange="location_picker" value="{{location_list[location_selection_index]}}" range="{{location_list}}">
-				<text class="picker">
-        交易地点: {{location_list[location_selection_index]}}
-      </text>
-			</picker>
-		</view>
-
-		<view class="section">
-			<picker name="transaction_date" mode="date" value="{{date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
-				<text class="picker">
-          交易日期: {{date}}
-        </text>
-			</picker>
-		</view>
-
-		<view class="section">
-			<button bindtap="chooseImage"> choose image </button>
-		</view>
-
-    <container class="photo-box">
-      <block wx:for="{{image_urls}}" wx:key="*this">
-        <image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
-      </block>
-    </container>
-
-		<button form-type="submit" class="button"> Submit </button>
 	</form>
 </view>

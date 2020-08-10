@@ -1,0 +1,15 @@
+<view>
+
+  <text>我的商品</text>
+
+  <text>{{nick_name}}</text>
+
+  <container class="container-box">
+    <block wx:for="{{posts}}" wx:key="*this">
+      <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
+          <image class="product-photo"/>
+          <text class="product-text">{{item.title}}</text>
+      </view>
+    </block>
+  </container>
+</view>
