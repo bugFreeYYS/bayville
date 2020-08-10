@@ -2,6 +2,11 @@ Page({
   data: {
     nick_name:'default'
   },
+  test: function(event){
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
   // onLoad: function(){
     // wx.cloud.callFunction({
     //   name: "getMyPosts",
