@@ -45,12 +45,16 @@ Page({
         icon: '../../images/index/trump.png'
       }
     ],
-    posts_display_count: 3
+    posts_display_count: 2
   },
 
+  // Load the page
   onLoad: function () {
     var that = this;
     var post;
+
+    wx.stopPullDownRefresh();
+    //未完成： 加载完posts之后读取用户昵称并显示在主页上， 异步函数待研究
     var get_all_posts= new Promise(function(resolve, reject){
       wx.cloud.callFunction({
         name: "getPosts",
@@ -58,19 +62,16 @@ Page({
           that.setData({
             posts: res.result.data
           }),
+   
           that.setData({
-            posts_display: that.data.posts//.slice(0,that.data.posts_display_count)
+            posts_display: that.data.posts.slice(0,that.data.posts_display_count)
           });
           for (post in that.data.posts){
-             that.add_nickname(that.data.posts[post].seller_id,function(nickname){
-              
+             that.add_nickname(that.data.posts[post].seller_id,function(nickname){ 
                 that.data.posts[post].nickname=nickname;
-              
             })
           }
           resolve('success');
-
-          
         }
       });
       
@@ -79,9 +80,6 @@ Page({
       get_all_posts.then(function(msg){
         // console.log(msg)
       })
-      
-      
-
     
   },
 
@@ -99,6 +97,7 @@ Page({
   },
 
 
+  // route to listing page
   goToItem: function (e) {
     var itemid = e.currentTarget.dataset.itemid;
     
@@ -107,6 +106,7 @@ Page({
     })
   },
 
+  // route to category page
   goToCategory: function (e) {
     var that = this;
     var category = e.currentTarget.dataset.category.name;
@@ -116,13 +116,36 @@ Page({
     })
   },
 
-  continuousScroll: function(event){
-    var count = this.data.posts_display_count + 4;
-    this.setData({
-      posts_display_count : count
-    })
+  // reload the page
+  onPullDownRefresh: function () {
+    var that = this;
+    this.onLoad();
   },
 
+  // load more listings
+  onReachBottom: function () {
+    var that = this;
 
+    wx.showToast({
+      title: '玩命加载中',
+      icon: 'loading',
+      duration: 500
+    })
 
+    var count = this.data.posts_display_count + 2
+    if (count > this.data.posts.length + 1) {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none',
+        duration: 1000
+      })
+    } else {
+      this.setData({
+          posts_display_count: count
+        }),
+        this.setData({
+          posts_display: this.data.posts.slice(0, this.data.posts_display_count)
+        })
+    }
+  }
 })
