@@ -37,7 +37,7 @@
 
       <view catchtap="goToCategory" data-category="{{item}}" class="category-box">
         <image class="category-icon" src="{{item.icon}}"/>
-        <text class="produce-text">{{item.name}}</text>
+        <text class="produce-text">{{item.name}} </text>
 
       </view>
     </block>
@@ -48,6 +48,7 @@
       <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
           <image src="{{item.image_urls_cloud[0]}}" class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
+          <text class="product-text" > {{item.nickname}} </text>
       </view>
     </block>
   </container>
