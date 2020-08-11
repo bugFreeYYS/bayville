@@ -1,16 +1,72 @@
-<view>
+<view class='content'>
+  <!-- display icon and nickname -->
+  <view class='head'>
+    <!-- not login yet -->
+    <block wx:if="{{!login}}">
+      <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">login</button>
+    </block>
 
-  <text>我的商品</text>
-
-  <text>{{nick_name}}</text>
-
-  <container class="container-box">
-    <block wx:for="{{posts}}" wx:key="*this">
-      <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
-          <image class="product-photo"/>
-          <text class="product-text">{{item.title}}</text>
+    <!-- login already -->
+    <block wx:else>
+      <view class='headIcon'>
+        <image src="{{userInfo.avatarUrl}}"></image>
+      </view>
+      <view>
+        <text>{{userInfo.nickName}}</text>
       </view>
     </block>
-  </container>
+  </view>
+
+  <!-- tabs to other pages -->
+  <view class='tab-container'>
+    <view class='seperate-line'></view>
+    <!-- sold -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/sold.png' class="icon"></image>
+      </view>
+      <view class='tab-text'>我卖出的</view>
+      <view class='arrow'>
+        <text>></text>
+      </view>
+    </view>
+    <view class='seperate-line'></view>
+
+    <!-- bought -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/bought.png' class='icon'></image>
+      </view>
+      <view class='tab-text'>我买到的</view>
+      <view class='arrow'>
+        <text>></text>
+      </view>
+    </view>
+    <view class='seperate-line'></view>
+
+    <!-- liked -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/liked.png' class='icon'></image>
+      </view>
+      <view class='tab-text'>赞过的</view>
+      <view class='arrow'>
+        <text>></text>
+      </view>
+    </view>
+    <view class='seperate-line'></view>
+
+    <!-- starred -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/starred.png' class='icon'></image>
+      </view>
+      <view class='tab-text'>收藏的</view>
+      <view class='arrow'>
+        <text>></text>
+      </view>
+    </view>
+    <view class='seperate-line'></view>
+  </view>
 
 </view>

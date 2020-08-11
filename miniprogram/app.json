@@ -17,7 +17,8 @@
     "pages/userProfile/userProfile",
     "pages/seeItem/seeItem",
     "pages/seeCategory/seeCategory",
-    "pages/editPost/editPost"
+    "pages/editPost/editPost",
+    "pages/aboutUs/aboutUs"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -45,6 +46,12 @@
         "text": "我的",
         "iconPath": "images/tab/userProfile_off.png",
         "selectedIconPath": "images/tab/userProfile_on.png"
+      },
+      {
+        "pagePath": "pages/aboutUs/aboutUs",
+        "text": "关于我们",
+        "iconPath": "images/tab/aboutUs_off.png",
+        "selectedIconPath": "images/tab/aboutUs_on.png"
       }
     ]
   },
