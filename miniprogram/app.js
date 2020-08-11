@@ -52,6 +52,7 @@ App({
 
     this.globalData = {}
   },
+  
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮

@@ -1,104 +1,72 @@
-<!-- <view>
-
-  <text>我的商品</text>
-
-  <text>{{nick_name}}</text>
-
-  <container class="container-box">
-    <block wx:for="{{posts}}" wx:key="*this">
-      <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
-          <image class="product-photo"/>
-          <text class="product-text">{{item.title}}</text>
-      </view>
-    </block>
-  </container>
-</view> -->
-
-
-<!--pages/mine/mine.wxml-->
 <view class='content'>
+  <!-- display icon and nickname -->
   <view class='head'>
-    <button wx:if="{{!logged}}" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" plain='true'>
-      获取头像昵称
-    </button>
+    <!-- not login yet -->
+    <block wx:if="{{!login}}">
+      <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">login</button>
+    </block>
+
+    <!-- login already -->
     <block wx:else>
       <view class='headIcon'>
         <image src="{{userInfo.avatarUrl}}"></image>
       </view>
-      <view class="login" bindtap="toLogin">
+      <view>
         <text>{{userInfo.nickName}}</text>
       </view>
     </block>
-    <view class='detail' bindtap='information'>
-        <text>></text>
-    </view>
   </view>
 
-  <view class='hr'>
-    <view class='item' bindtap='sold'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
+  <!-- tabs to other pages -->
+  <view class='tab-container'>
+    <view class='seperate-line'></view>
+    <!-- sold -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/sold.png' class="icon"></image>
       </view>
-      <view class='title'>我卖出的</view>
-      <view class='detail1'>
+      <view class='tab-text'>我卖出的</view>
+      <view class='arrow'>
         <text>></text>
       </view>
     </view>
-    <view class='seperate1'></view>
-    <view class='item' bindtap='bought'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
-      </view>
-      <view class='title'>我买到的</view>
-      <view class='detail1'>
-        <text>></text>
-      </view>
-    </view>
-    <view class='seperate1'></view>
-    <view class='item' bindtap='ontrans'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
-      </view>
-      <view class='title'>正在交易</view>
-      <view class='detail1'>
-        <text>></text>
-      </view>
-    </view>
-    <view class='seperate1'></view>
-    <view class='item' bindtap='published'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
-      </view>
-      <view class='title'>我发布的</view>
-      <view class='detail1'>
-        <text>></text>
-      </view>
-    </view>
+    <view class='seperate-line'></view>
 
-    <view class='seperate'></view>
-    
-    <view class='item' bindtap='setup'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
+    <!-- bought -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/bought.png' class='icon'></image>
       </view>
-      <view class='title'>设置</view>
-      <view class='detail1'>
+      <view class='tab-text'>我买到的</view>
+      <view class='arrow'>
         <text>></text>
       </view>
     </view>
-    <view class='seperate1'></view>
+    <view class='seperate-line'></view>
 
-    <view class='item' bindtap='aboutus'>
-      <view class='itemIcon'>
-        <image src='../../images/mine/arrow.png'></image>
+    <!-- liked -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/liked.png' class='icon'></image>
       </view>
-      <view class='title'>关于我们</view>
-      <view class='detail1'>
+      <view class='tab-text'>赞过的</view>
+      <view class='arrow'>
         <text>></text>
       </view>
     </view>
-    <view class='seperate1'></view>
+    <view class='seperate-line'></view>
 
+    <!-- starred -->
+    <view class='tab' bindtap='redirect_sold'>
+      <view class='icon-container'>
+        <image src='/images/userProfile/starred.png' class='icon'></image>
+      </view>
+      <view class='tab-text'>收藏的</view>
+      <view class='arrow'>
+        <text>></text>
+      </view>
+    </view>
+    <view class='seperate-line'></view>
   </view>
 
 </view>
