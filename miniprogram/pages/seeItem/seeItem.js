@@ -3,7 +3,6 @@
 var utils= require('../../utils/util.js');
 
 Page({
-
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isHide: false,
@@ -16,11 +15,23 @@ Page({
     imgwidth: 0,
     imgheight: 0,
 
+    job: [],
+    jobList: [],
+    id: '',
+    isClick: false,
+    jobStorage: [],
+    jobId: ''
+
   },
 
   onLoad: function (options) {
     
-  
+    wx.getStorage({
+      key: 'posts',
+      success (res) {
+        console.log(res.data)
+      }
+    });
     var _this = this;
     var itemid = options.itemid;
     this.setData({
@@ -82,7 +93,6 @@ Page({
     // console.log(this.data);
   },
 
-
   imageLoad: function (e) {
     var _this = this;
     var $width = e.detail.width, //获取图片真实宽度
@@ -94,5 +104,26 @@ Page({
       imgwidth: viewWidth*2,
       imgheight: viewHeight*2
     })
-  }
+  },
+
+  haveSave(e) {
+    if (!this.data.isClick == true) {
+     let jobData = this.data.jobStorage;
+     jobData.push({
+     jobid: jobData.length,
+     id: this.data.job.id
+     })
+     wx.setStorageSync('jobData', jobData);//设置缓存
+     wx.showToast({
+     title: '已收藏',
+     });
+    } else {
+     wx.showToast({
+     title: '已取消收藏',
+     });
+    }
+    this.setData({
+     isClick: !this.data.isClick
+    })
+    }
 })
