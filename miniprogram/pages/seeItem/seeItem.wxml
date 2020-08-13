@@ -22,3 +22,6 @@
 <text>{{item_info.description}}</text>
 
 <text>{{seller_info.nickname}}</text>
+
+
+<image src="{{imgurl}}" style="width:100px;height:100px;" bindtap="et_collection" animation="{{animationdata}}"></image>

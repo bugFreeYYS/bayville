@@ -48,5 +48,10 @@ Page({
     wx.navigateTo({
       url: '/pages/MyViewedItems/MyViewedItems',
     })
+  },
+  redirect_collected: function(event){
+    wx.navigateTo({
+      url: '/pages/MyCollectedItems/MyCollectedItems',
+    })
   }
 })

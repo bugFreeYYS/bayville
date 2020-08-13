@@ -12,5 +12,11 @@ Page({
         })
       }
     })
-  }
+  },
+  goToMyItem: function (e) {
+    var itemid = e.currentTarget.dataset.itemid;
+    wx.navigateTo({
+      url: '/pages/editPost/editPost?itemid=' + itemid,
+    })
+  },
 })

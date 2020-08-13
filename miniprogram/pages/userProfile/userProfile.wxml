@@ -57,7 +57,7 @@
     <view class='seperate-line'></view>
 
     <!-- starred -->
-    <view class='tab' bindtap='redirect_sold'>
+    <view class='tab' bindtap='redirect_collected'>
       <view class='icon-container'>
         <image src='/images/userProfile/starred.png' class='icon'></image>
       </view>

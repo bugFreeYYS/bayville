@@ -2,6 +2,9 @@
 
 var utils= require('../../utils/util.js');
 
+var me;
+var animation;
+
 Page({
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -15,26 +18,29 @@ Page({
     imgwidth: 0,
     imgheight: 0,
 
-    job: [],
-    jobList: [],
-    id: '',
-    isClick: false,
-    jobStorage: [],
-    jobId: ''
+    isCollected:false,
+
+    // collect: 0, imgurl:"/images/seeItem/collect.svg",
+    collected: false, 
+    imgurl:"/images/seeItem/collected.svg",
+
+    animationdata:{}
 
   },
 
   onLoad: function (options) {
+    
     var app= getApp();
+    // console.log(app.globalData.user_infos);
+    this.updatedata(options,app.globalData.user_infos);
     var _this = this;
     var itemid = options.itemid;
+
     this.setData({
       itemid: itemid,
     })
 
     let new_viewed_posts= Array(...new Set(app.globalData.user_infos.viewed_posts).add(itemid));
-
-   
     wx.cloud.callFunction({
       name:"AddMyViewedPosts",
       data:{
@@ -45,12 +51,7 @@ Page({
         console.log('added the item into my viewed posts');
       }
     });
-    wx.getStorage({
-      key: 'posts',
-      success (res) {
-        console.log(res.data)
-      }
-    });
+
     
 		wx.getSystemInfo({
 			success: function(res) {
@@ -121,24 +122,72 @@ Page({
     })
   },
 
-  haveSave(e) {
-    if (!this.data.isClick == true) {
-     let jobData = this.data.jobStorage;
-     jobData.push({
-     jobid: jobData.length,
-     id: this.data.job.id
-     })
-     wx.setStorageSync('jobData', jobData);//设置缓存
-     wx.showToast({
-     title: '已收藏',
-     });
-    } else {
-     wx.showToast({
-     title: '已取消收藏',
-     });
+  et_collection :function(){
+    let app= getApp();
+    let that=this;
+    this.at_play();
+    var new_saved_posts;
+    // setTimeout(function(){
+      
+    // }, 800);
+
+    if(!that.data.collected){
+      new_saved_posts= Array(...new Set(app.globalData.user_infos.saved_posts).add(that.data.itemid)); 
+    }else{
+      new_saved_posts= new Set(app.globalData.user_infos.saved_posts)
+      new_saved_posts.delete(that.data.itemid); 
+      new_saved_posts= Array(...new_saved_posts);
     }
+
+    console.log(new_saved_posts);
+   
+    wx.cloud.callFunction({
+      name:"AddMySavedPosts",
+      data:{
+        new_saved_posts: new_saved_posts
+      },
+      success: (res) =>{
+        var imgurl, collected;
+        app.globalData.user_infos.saved_posts= new_saved_posts;
+        console.log('added the item into my saved posts');
+        
+      if (that.data.collected){
+        imgurl='/images/seeItem/collect.svg';
+        collected=false;
+       
+      }else{
+        imgurl='/images/seeItem/collected.svg';
+        collected=true;
+      }
+      that.setData({
+        imgurl:imgurl,
+        collected:collected,
+      });
+        
+        wx.showToast({
+          title: that.data.collected?"收藏成功":"收藏取消",
+          duration:1000,
+          icon:"sucess",
+          make:true
+         });
+         
+      }
+    });
+  },
+
+  at_play: function(){
+    animation=wx.createAnimation({
+      delay: 500,
+    });
+    animation.scale(0.2).step({duration:200});
+    animation.scale(1).step({duration:200});
+    this.setData({animationdata:animation.export()}); 
+  },
+
+  updatedata: function(options,userinfo){
     this.setData({
-     isClick: !this.data.isClick
+      collected: userinfo.saved_posts.includes(options.itemid),
+      imgurl: userinfo.saved_posts.includes(options.itemid)?'/images/seeItem/collected.svg':'/images/seeItem/collect.svg'
     })
-    }
+  }
 })
