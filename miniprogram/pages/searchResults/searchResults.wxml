@@ -1,0 +1,20 @@
+<view class="search-container">
+  <view class="search-section">
+    <view class="search-image-wrapper">
+      <image class="search-image" src="/images/index/search.png"></image>
+    </view>
+
+    <view class="search-input-wrapper ">
+      <input bindconfirm="search" class="search-input" placeholder="输入想搜索的东西" />
+    </view>
+  </view>
+</view>
+
+<view class="container-box" scroll-y="{{true}}">
+  <block wx:for="{{content}}" wx:key="*this">
+    <view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
+      <image src="{{item.image_urls_cloud[0]}}" class="product-photo" />
+      <text class="product-text">{{item.title}}</text>
+    </view>
+  </block>
+</view>

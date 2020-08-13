@@ -28,7 +28,6 @@ Page({
     var image_urls = this.data.image_urls;
     var image;
 
-    
     this.setData({image_urls_cloud : []})
     for (image of image_urls){
       var date= new Date();
@@ -47,7 +46,10 @@ Page({
   },
 
   async postSell(event){
-    // console.log("1");
+    wx.showLoading({
+      title: '发布中',
+    })
+    
     await this.uploadImages();
     
     wx.cloud.callFunction({
@@ -78,7 +80,11 @@ Page({
         )
       }
  
-    })
+    });
+
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 1000)
   },
 
   title_input: function(event){
@@ -89,20 +95,12 @@ Page({
   },
 
   category_picker: function(event){
-    // console.log('category is', event.detail.value)
     this.setData({
       category_selection_index: event.detail.value
     })
   },
 
   location_picker: function(event){
-    this.setData({
-      location_selection_index: event.detail.value
-    })
-  },
-
-  title_input: function(event){
-    // console.log('title is', event.detail.value)
     this.setData({
       location_selection_index: event.detail.value
     })
