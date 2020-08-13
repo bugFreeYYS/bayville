@@ -1,0 +1,12 @@
+
+<view>
+
+  <container class="container-box">
+    <block wx:for="{{posts}}" wx:key="*this">
+      <view data-itemid="{{item._id}}" class="item-box">
+          <image class="product-photo"/>
+          <text class="product-text">{{item.title}}</text>
+      </view>
+    </block>
+  </container>
+</view>

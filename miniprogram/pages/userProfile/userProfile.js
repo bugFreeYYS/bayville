@@ -43,5 +43,10 @@ Page({
     wx.navigateTo({
       url: '/pages/sold/sold',
     })
+  },
+  redirect_viewed: function(event){
+    wx.navigateTo({
+      url: '/pages/MyViewedItems/MyViewedItems',
+    })
   }
 })

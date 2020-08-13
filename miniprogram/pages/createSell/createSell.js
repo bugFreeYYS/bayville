@@ -2,7 +2,7 @@
 Page({
   data:{
     title: '',
-    date: '',
+    date: '选择日期',
     category_list : ["Textbook", "Electronics", "Furniture", "Cosmetics"],
     category_selection_index:0,
     location_list : ["Utown", "Science", "FASS", "SOC"],

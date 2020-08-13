@@ -17,6 +17,9 @@ exports.main = async (event, context) => {
         nickname: event.nickname,
         gender: event.gender,
         _id: wxContext.OPENID,
+        liked_posts:[],
+        viewed_posts:[],
+        saved_posts:[]
 
       }
     })
@@ -25,7 +28,7 @@ exports.main = async (event, context) => {
       return await db.collection('users').doc(wxContext.OPENID).update({
         data: {
           nickname: event.nickname,
-          gender: event.gender
+          gender: event.gender,
         }
       })
     } catch (e) {

@@ -25,18 +25,33 @@ Page({
   },
 
   onLoad: function (options) {
-    
+    var app= getApp();
+    var _this = this;
+    var itemid = options.itemid;
+    this.setData({
+      itemid: itemid,
+    })
+
+    let new_viewed_posts= Array(...new Set(app.globalData.user_infos.viewed_posts).add(itemid));
+
+   
+    wx.cloud.callFunction({
+      name:"AddMyViewedPosts",
+      data:{
+        new_viewed_posts: new_viewed_posts
+      },
+      success: (res) =>{
+        app.globalData.user_infos.viewed_posts= new_viewed_posts;
+        console.log('added the item into my viewed posts');
+      }
+    });
     wx.getStorage({
       key: 'posts',
       success (res) {
         console.log(res.data)
       }
     });
-    var _this = this;
-    var itemid = options.itemid;
-    this.setData({
-      itemid: itemid,
-    })
+    
 		wx.getSystemInfo({
 			success: function(res) {
 				_this.setData({

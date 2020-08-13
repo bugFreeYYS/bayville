@@ -1,7 +1,8 @@
 //app.js
 App({
+  
   onLaunch: function () {
-
+    var that=this;
     var that = this;
     // 查看是否授权
     wx.getSetting({
@@ -27,6 +28,14 @@ App({
                 
             }
           });
+          wx.cloud.callFunction({
+            name: 'getUserInfo',
+            success: (res) =>{
+              console.log('user infos collected')
+              that.globalData.user_infos= res.result.data;
+            }
+          });
+
         } else {
           // 用户没有授权
           // 改变 isHide 的值，显示授权页面
