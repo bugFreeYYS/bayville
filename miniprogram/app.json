@@ -20,7 +20,8 @@
     "pages/editPost/editPost",
     "pages/aboutUs/aboutUs",
     "pages/MyViewedItems/MyViewedItems",
-    "pages/MyCollectedItems/MyCollectedItems"
+    "pages/MyCollectedItems/MyCollectedItems",
+    "pages/searchResults/searchResults"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

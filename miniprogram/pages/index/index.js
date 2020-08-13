@@ -147,5 +147,11 @@ Page({
           posts_display: this.data.posts.slice(0, this.data.posts_display_count)
         })
     }
+  },
+  
+  search: function(){
+    wx.navigateTo({
+      url: '/pages/searchResults/searchResults',
+    })
   }
 })

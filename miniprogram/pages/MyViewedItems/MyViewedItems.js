@@ -12,10 +12,7 @@ Page({
         viewed_posts: app.globalData.user_infos.viewed_posts
       },
       success: (res) => {
-        console.log('loaded my viewed items')
-        console.log(res.result.data);
         this.setData({
-        
           posts: res.result.data
         })
       }

@@ -18,17 +18,17 @@
 </view>
 
 <view wx:else>
-<view class="search-container">
-	<view class="search-section">
-		<view class="search-image-wrapper">
-			<image class="search-image" src="/images/index/search.png"></image>
-		</view>
+	<view class="search-container" bindtap="search">
+		<view class="search-section">
+			<view class="search-image-wrapper">
+				<image class="search-image" src="/images/index/search.png"></image>
+			</view>
 
-		<view class="search-input-wrapper ">
-			<input class="search-input" placeholder="输入想搜索的东西" />
+			<view class="search-input-wrapper ">
+				<input class="search-input" placeholder="输入想搜索的东西" disabled="true"/>
+			</view>
 		</view>
 	</view>
-</view>
 
 	<!-- swiper -->
 	<view class="swiper">

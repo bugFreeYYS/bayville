@@ -1,0 +1,79 @@
+
+.search-container {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 999;
+  background-color: green;
+  padding-left: 5%;
+  padding-top: 2%;
+  height: 6%;
+}
+
+.search-section {
+  display: flex;
+  width: 90%;
+  flex-direction: row;
+  border-radius: 20px;
+  background-color: #f5f4f4;
+  height: 80%;
+}
+
+.search-image-wrapper {
+  padding-left: 1.7%;
+  padding-top: 1.5%;
+  border-radius: 25px;
+}
+
+.search-image {
+  flex: 1;
+  border: none !important;
+  width: 20px;
+  height: 20px;
+}
+
+.search-input-wrapper {
+  flex: 8;
+  padding-top: 1.45%;
+  padding-left: 1.5%;
+  background-color: transparent;
+  border-radius: 3px;
+}
+
+
+.container-box {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.item-box {
+  float: left;
+  width: 48%;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 10px 10px;
+}
+
+
+.product-photo {
+  width: 100%;
+  height: 335rpx;
+  background-size: 100% 100%;
+  border: 1px solid rgba(240, 240, 240, .8);
+}
+
+.product-text {
+  margin: 30rpx 0 30rpx 20rpx;
+  font-weight: bold;
+  align-self: flex-start;
+  flex: 1 0 auto;
+  font-size: 32rpx;
+  color: #292929;
+}
