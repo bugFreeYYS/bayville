@@ -3,7 +3,7 @@
 
   <container class="container-box">
     <block wx:for="{{posts}}" wx:key="*this">
-      <view data-itemid="{{item._id}}"  class="item-box">
+      <view catchtap='goToMyItem' data-itemid="{{item._id}}"  class="item-box">
           <image class="product-photo"/>
           <text class="product-text">{{item.title}}</text>
           <button bindtap="confirmDelete" data-itemid="{{item._id}}">删除</button>

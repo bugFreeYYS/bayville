@@ -15,9 +15,9 @@ exports.main = async (event, context) => {
       category: event.category,
       description:event.description,
       location: event.location,
-      concact_info: event.contact,
+      contact: event.contact,
       
-      transaction_date: event.date,
+      transaction_date: event.transaction_date,
       date_created:today,
       date_modified:today,
       date_expiring: date_expired,

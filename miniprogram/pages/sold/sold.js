@@ -48,5 +48,13 @@ Page({
         that.onLoad();
       }
     })
-  }
+  },
+
+  goToMyItem: function (e) {
+    var itemid = e.currentTarget.dataset.itemid;
+    
+    wx.navigateTo({
+      url: '/pages/seeMyItem/seeMyItem?itemid=' + itemid,
+    })
+  },
 })

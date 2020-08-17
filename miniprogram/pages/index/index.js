@@ -61,16 +61,14 @@ Page({
         success: (res) => {
           that.setData({
             posts: res.result.data
-          }),
-   
+          })
+          for (post in that.data.posts){
+            that.add_nickname(that.data.posts[post])
+         }
           that.setData({
             posts_display: that.data.posts.slice(0,that.data.posts_display_count)
           });
-          for (post in that.data.posts){
-             that.add_nickname(that.data.posts[post].seller_id,function(nickname){ 
-                that.data.posts[post].nickname=nickname;
-            })
-          }
+          
           resolve('success');
         }
       });
@@ -79,23 +77,24 @@ Page({
 
       get_all_posts.then(function(msg){
         // console.log(msg)
-      })
+      });
+
+      console.log(this.data);
     
   },
 
-  add_nickname: async function(openid,callback){
+  add_nickname: async function(data){
     await wx.cloud.callFunction({
       name:'getNickname',
       data:{
-        openid:openid
+        openid:data.seller_id
       },
       success: (res) =>{
-        // console.log(res.result.data.nickname);
-        return callback(res.result.data.nickname)
+        data['nickname']=res.result.data.nickname;
+        
       }
     })
   },
-
 
   // route to listing page
   goToItem: function (e) {

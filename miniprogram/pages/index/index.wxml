@@ -59,6 +59,7 @@
 			<view catchtap='goToItem' data-itemid="{{item._id}}" class="item-box">
 				<image src="{{item.image_urls_cloud[0]}}" class="product-photo" />
 				<text class="product-text">{{item.title}}</text>
+				<text class="product-text">{{item.nickname}}</text>
 			</view>
 		</block>
 	</view>

@@ -1,0 +1,28 @@
+
+
+<view class="swiper" >
+      <swiper indicator-dots="{{indicatorDots}}" style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{item_info.image_urls_cloud}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" class="swiper-item" bindload="imageLoad"
+            style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+<text>{{item_info.title}}</text>
+
+<text>   {{seller_info.nickname}} 发表于 {{converted_time}}</text>
+
+<text>{{item_info.no_likes}}</text>
+<text>{{item_info.category}}</text>
+
+<text>{{item_info.description}}</text>
+
+<text>{{seller_info.nickname}}</text>
+
+<button bindtap="goToEdit"  data-itemid="{{itemid}}"> 更改数据</button>
+
+

@@ -1,0 +1,66 @@
+<view>
+	<form bindsubmit="postSell">
+		<view class="bg-fff p-lr30 border-t">
+			<!-- 商品名称 -->
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">商品名称: </label>
+				<input class="ml40 flex1" name='title' bindinput="title_input" placeholder="输入商品名称" value="{{originalValues.title}}"></input>
+			</view>
+
+			<!-- 价格 -->
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">价格: </label>
+				<input class="ml40 flex1" name='price' type="digit" auto-focus focus='{{focus}}' value="{{originalValues.price}}" title="" placeholder="输入商品价格" bindinput="handleInput"></input>
+			</view>
+
+			<!-- 联系方式 -->
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">联系方式: </label>
+				<input class="ml40 flex1" name="contact"  type="string"  value="{{originalValues.contact}}" placeholder="输入联系方式"></input>
+			</view>
+
+			<!-- 商品种类 -->
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">商品种类:</label>
+				<picker class="ml40 flex1" name="category" bindchange="category_picker"  value="{{originalValues.category}}" range="{{category_list}}">
+					{{ category_list[originalValues.category]}}
+				</picker>
+			</view>
+
+			<!-- 交易地点 -->
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">交易地点:</label>
+				<picker class="ml40 flex1" name="location" bindchange="location_picker"  value="{{originalValues.location}}" range="{{location_list}}">
+					{{ location_list[originalValues.location]}}
+				</picker>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<label for="" class="font14">交易日期:</label>
+				<picker class="ml40 flex1" name="transaction_date" mode="date" value="{{originalValues.transaction_date}}" start="2015-09-01" end="2025-09-01" bindchange="date_picker">
+					{{originalValues.transaction_date}}
+				</picker>
+			</view>
+
+			<!-- description -->
+			<view class="ipt-wrap border-b">
+				<textarea name="description" id="" class="textarea _w100 p-tb30 lh10" maxlength="50" type="string" value="{{originalValues.description}}" placeholder="可在此处填写商品描述"></textarea>
+			</view>
+
+			<view class="ipt-wrap border-b flex ai-center">
+				<button class="ml40 flex1" bindtap="chooseImage"> 上传照片 </button>
+			</view>
+
+			<container class="photo-box">
+				<block wx:for="{{image_urls}}" wx:key="*this">
+					<image class="photo-preview" src="{{item}}" bindtap="previewImage"></image>
+				</block>
+			</container>
+
+		</view>
+		<view style="padding: 2% 2%">
+			<button form-type="reset" style= "background-color: #FFA500; text-align: center; font-size: 16px; color: white; width: 48.5%; float:left;"> 重置 </button>
+			<button form-type="submit" style= "background-color: #4CAF50; text-align: center; font-size: 16px; color: white; width: 48.5%; float:right"> 提交 </button>
+		</view>
+	</form>
+</view>
