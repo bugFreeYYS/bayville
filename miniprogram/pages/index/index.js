@@ -55,43 +55,43 @@ Page({
 
     wx.stopPullDownRefresh();
     //未完成： 加载完posts之后读取用户昵称并显示在主页上， 异步函数待研究
-    var get_all_posts= new Promise(function(resolve, reject){
+    var get_all_posts = new Promise(function (resolve, reject) {
       wx.cloud.callFunction({
         name: "getPosts",
         success: (res) => {
           that.setData({
             posts: res.result.data
           })
-          for (post in that.data.posts){
+          for (post in that.data.posts) {
             that.add_nickname(that.data.posts[post])
-         }
+          }
           that.setData({
-            posts_display: that.data.posts.slice(0,that.data.posts_display_count)
+            posts_display: that.data.posts.slice(0, that.data.posts_display_count)
           });
-          
+
           resolve('success');
         }
       });
-      
+
     })
 
-      get_all_posts.then(function(msg){
-        // console.log(msg)
-      });
+    get_all_posts.then(function (msg) {
+      // console.log(msg)
+    });
 
-      console.log(this.data);
-    
+    console.log(this.data);
+
   },
 
-  add_nickname: async function(data){
+  add_nickname: async function (data) {
     await wx.cloud.callFunction({
-      name:'getNickname',
-      data:{
-        openid:data.seller_id
+      name: 'getNickname',
+      data: {
+        openid: data.seller_id
       },
-      success: (res) =>{
-        data['nickname']=res.result.data.nickname;
-        
+      success: (res) => {
+        data['nickname'] = res.result.data.nickname;
+
       }
     })
   },
@@ -99,7 +99,7 @@ Page({
   // route to listing page
   goToItem: function (e) {
     var itemid = e.currentTarget.dataset.itemid;
-    
+
     wx.navigateTo({
       url: '/pages/seeItem/seeItem?itemid=' + itemid,
     })
@@ -124,7 +124,7 @@ Page({
   // load more listings
   onReachBottom: function () {
     var that = this;
-
+    // loading more
     wx.showToast({
       title: '玩命加载中',
       icon: 'loading',
@@ -133,6 +133,7 @@ Page({
 
     var count = this.data.posts_display_count + 2
     if (count > this.data.posts.length + 1) {
+      // end of listings
       wx.showToast({
         title: '没有更多了',
         icon: 'none',
@@ -147,8 +148,9 @@ Page({
         })
     }
   },
-  
-  search: function(){
+
+  // search bar re-direction
+  search: function () {
     wx.navigateTo({
       url: '/pages/searchResults/searchResults',
     })

@@ -4,8 +4,8 @@
   top: 0px;
   width: 100%;
   z-index: 999;
-  background-color: green;
   padding-left: 5%;
+  background-color: rgb(216, 212, 212);
   padding-top: 2%;
   height: 6%;
 }
